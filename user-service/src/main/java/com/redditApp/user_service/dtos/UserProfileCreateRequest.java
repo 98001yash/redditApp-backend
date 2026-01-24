@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserProfileCreateRequest {
 
-    private Long userId;
     private String displayName;
     private String avatarUrl;
 }

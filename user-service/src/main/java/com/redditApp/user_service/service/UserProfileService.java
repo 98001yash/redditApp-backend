@@ -1,9 +1,11 @@
 package com.redditApp.user_service.service;
 
-
+import com.redditApp.user_service.auth.UserContextHolder;
 import com.redditApp.user_service.dtos.UserProfileCreateRequest;
 import com.redditApp.user_service.dtos.UserProfileDto;
 import com.redditApp.user_service.entities.UserProfile;
+import com.redditApp.user_service.exceptions.ConflictException;
+import com.redditApp.user_service.exceptions.UnauthorizedException;
 import com.redditApp.user_service.repository.UserProfileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,36 +16,38 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserProfileService {
 
-
     private final UserProfileRepository userProfileRepository;
 
     public UserProfileDto createProfile(UserProfileCreateRequest request) {
-        log.info("Received request to create profile for userId={}", request.getUserId());
 
-        // Check if profile already exists
-        if (userProfileRepository.findById(request.getUserId()).isPresent()) {
-            log.warn("Profile already exists for userId={}", request.getUserId());
-            throw new RuntimeException("Profile already exists for userId=" + request.getUserId());
+        Long userId = UserContextHolder.getCurrentUserId();
+
+        if (userId == null) {
+            log.warn("Unauthorized attempt to create profile");
+            throw new UnauthorizedException("User not authenticated");
         }
 
-        log.info("Creating new UserProfile entity for userId={}", request.getUserId());
+        if (userProfileRepository.existsById(userId)) {
+            log.warn("Profile already exists for userId={}", userId);
+            throw new ConflictException("Profile already exists for userId=" + userId);
+        }
+
+        log.info("Creating user profile for userId={}", userId);
+
         UserProfile profile = UserProfile.builder()
-                .userId(request.getUserId())
+                .userId(userId)
                 .displayName(request.getDisplayName())
                 .avatarUrl(request.getAvatarUrl())
                 .build();
 
         UserProfile saved = userProfileRepository.save(profile);
-        log.info("UserProfile saved successfully: userId={}, displayName={}, avatarUrl={}",
-                saved.getUserId(), saved.getDisplayName(), saved.getAvatarUrl());
 
-        UserProfileDto dto = UserProfileDto.builder()
+        log.info("UserProfile created successfully for userId={}", userId);
+
+        return UserProfileDto.builder()
                 .userId(saved.getUserId())
                 .displayName(saved.getDisplayName())
                 .avatarUrl(saved.getAvatarUrl())
                 .build();
-
-        log.info("Returning UserProfileDto for userId={}", dto.getUserId());
-        return dto;
     }
 }
