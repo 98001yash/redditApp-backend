@@ -46,7 +46,6 @@ public class AuthService {
         // Create profile in User-Service
         try {
             UserProfileCreateRequest profileRequest = UserProfileCreateRequest.builder()
-                    .userId(savedUser.getId())
                     .displayName(signupRequestDto.getName()) // fallback to name/email
                     .avatarUrl(null)
                     .build();
