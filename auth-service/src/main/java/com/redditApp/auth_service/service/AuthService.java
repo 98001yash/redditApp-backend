@@ -1,6 +1,5 @@
 package com.redditApp.auth_service.service;
 
-import com.redditApp.auth_service.clients.UserServiceClient;
 import com.redditApp.auth_service.dtos.*;
 import com.redditApp.auth_service.entity.User;
 import com.redditApp.auth_service.enums.Role;
@@ -23,7 +22,6 @@ public class AuthService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
-    private final UserServiceClient userServiceClient;
 
     public UserResponseDto signup(SignupRequestDto signupRequestDto) {
         log.info("Attempting signup for email: {}", signupRequestDto.getEmail());
@@ -43,22 +41,8 @@ public class AuthService {
         User savedUser = userRepository.save(user);
         log.info("User registered successfully with id: {}", savedUser.getId());
 
-        // Create profile in User-Service
-        try {
-            UserProfileCreateRequest profileRequest = UserProfileCreateRequest.builder()
-                    .displayName(signupRequestDto.getName()) // fallback to name/email
-                    .avatarUrl(null)
-                    .build();
 
-            log.info("Sending request to User-Service to create profile for userId: {}", savedUser.getId());
-            UserProfileDto createdProfile = userServiceClient.createUserProfile(profileRequest);
-            log.info("Profile created successfully in User-Service for userId: {}", createdProfile.getUserId());
-        } catch (Exception e) {
-            log.error("Failed to create profile in User-Service for userId: {}. Error: {}", savedUser.getId(), e.getMessage());
-            // Optional: rollback user creation if profile fails
-        }
-
-        return modelMapper.map(savedUser, UserResponseDto.class);
+         return modelMapper.map(savedUser, UserResponseDto.class);
     }
 
     public String login(LoginRequestDto loginRequestDto) {
