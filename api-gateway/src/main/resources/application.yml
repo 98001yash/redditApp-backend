@@ -1,11 +1,9 @@
-
+jwt:
+  secretKey: mysupersecurekeyformysafarsaathijwt1234567890abcdefABCDEF1234567890
 
 spring:
   application:
     name: api-gateway
-
-server:
-  port: 8080
 
   cloud:
     gateway:
@@ -21,14 +19,16 @@ server:
               - PUT
               - DELETE
               - OPTIONS
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+          filters:
+            - AuthenticationFilter
 
-
-
-
-
-
-
-
+server:
+  port: 8080
 
 eureka:
   client:
