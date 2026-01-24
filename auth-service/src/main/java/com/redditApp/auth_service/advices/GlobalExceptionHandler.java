@@ -3,6 +3,7 @@ package com.redditApp.auth_service.advices;
 
 import com.redditApp.auth_service.exceptions.ResourceNotFoundException;
 import com.redditApp.auth_service.exceptions.RuntimeConflictException;
+import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
