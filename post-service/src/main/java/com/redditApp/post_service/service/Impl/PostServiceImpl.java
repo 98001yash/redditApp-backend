@@ -58,28 +58,61 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<PostResponse> getMainFeed(Pageable pageable) {
-        return null;
+        return postRepository
+                .findByIsDeletedFalse(pageable)
+                .map(this::mapToResponse);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<PostResponse> getSubredditFeed(Long subredditId, Pageable pageable) {
-        return null;
+        return postRepository
+                .findBySubredditIdAndIsDeletedFalse(subredditId, pageable)
+                .map(this::mapToResponse);
     }
+
 
     @Override
     public Page<PostResponse> getUserPosts(Long userId, Pageable pageable) {
-        return null;
+        return postRepository
+                .findByUserIdAndIsDeletedFalse(userId, pageable)
+                .map(this::mapToResponse);
     }
 
     @Override
     public PostResponse updatePost(Long postId, UpdatePostRequest request) {
-        return null;
+        Long currentUser = UserContextHolder.getCurrentUserId();
+
+        Post post = postRepository
+                .findByIdAndIsDeletedFalse(postId)
+                .orElseThrow(()->
+                        new ResourceNotFoundException("Post not found with id "+currentUser));
+        // only owner can update
+        if(!post.getUserId().equals(currentUser)){
+            throw new SecurityException("Forbidden");
+        }
+
+        post.setTitle(request.getTitle());
+        post.setContent(request.getContent());
+        return mapToResponse(post);
     }
 
     @Override
     public void deletePost(Long postId) {
 
+        Long currentUser = UserContextHolder.getCurrentUserId();
+
+        Post post = postRepository
+                .findByIdAndIsDeletedFalse(postId)
+                .orElseThrow(()->
+                        new ResourceNotFoundException("Post not found"));
+        // only owner can delete
+        if(!post.getUserId().equals(currentUser)){
+            throw new SecurityException("Forbidden");
+        }
+        post.setIsDeleted(true);
     }
 
     // HELPER
