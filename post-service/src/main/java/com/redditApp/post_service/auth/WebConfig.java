@@ -2,6 +2,7 @@ package com.redditApp.post_service.auth;
 
 
 
+import com.redditApp.user_service.auth.UserInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

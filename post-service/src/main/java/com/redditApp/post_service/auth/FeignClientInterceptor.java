@@ -1,6 +1,7 @@
 package com.redditApp.post_service.auth;
 
 
+import com.redditApp.user_service.auth.UserContextHolder;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.stereotype.Component;
