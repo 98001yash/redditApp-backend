@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class UserProfileService {
 
     private final UserProfileRepository userProfileRepository;
+
     public void createProfileIfNotExists(UserSignedUpEvent event) {
 
         if (userProfileRepository.existsById(event.getUserId())) {
@@ -29,5 +30,4 @@ public class UserProfileService {
         userProfileRepository.save(profile);
         log.info("Profile created for userId={}", event.getUserId());
     }
-
 }
