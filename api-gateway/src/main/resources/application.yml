@@ -34,6 +34,13 @@ spring:
           filters:
             - AuthenticationFilter
 
+        - id: post-service
+          uri: lb://post-service
+          predicates:
+            - Path=/post/**
+          filters:
+            - AuthenticationFilter
+
 server:
   port: 8080
 
