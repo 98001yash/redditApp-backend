@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.redditApp</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>post-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user-service</name>
-	<description>user-service for the reddit-App</description>
+	<name>Post-service</name>
+	<description>Post for the reddit-App</description>
 	<url/>
 	<licenses>
 		<license/>

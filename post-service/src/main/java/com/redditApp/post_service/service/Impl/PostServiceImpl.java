@@ -7,7 +7,9 @@ import com.redditApp.post_service.dtos.CreatePostRequest;
 import com.redditApp.post_service.dtos.PostResponse;
 import com.redditApp.post_service.dtos.UpdatePostRequest;
 import com.redditApp.post_service.entity.Post;
+import com.redditApp.post_service.event.PostCreatedEvent;
 import com.redditApp.post_service.exceptions.ResourceNotFoundException;
+import com.redditApp.post_service.kafka.PostEventProducer;
 import com.redditApp.post_service.repository.PostRepository;
 import com.redditApp.post_service.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final PostEventProducer producer;
 
     //    CREATE
 
@@ -44,8 +47,16 @@ public class PostServiceImpl implements PostService {
                 .build();
 
 
-        Post savedPost = postRepository.save(post);
-        return mapToResponse(savedPost);
+        Post saved = postRepository.save(post);
+        producer.publishPostCreated(
+                PostCreatedEvent.builder()
+                        .postId(saved.getId())
+                        .userId(saved.getUserId())
+                        .subRedditId(saved.getSubredditId())
+                        .createdAt(saved.getCreatedAt())
+                        .build()
+        );
+        return mapToResponse(saved);
     }
 
     //       READ
