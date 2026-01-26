@@ -1,7 +1,7 @@
 package com.redditApp.post_service.advices;
 
 
-import com.redditApp.user_service.advices.ApiError;
+
 import lombok.Data;
 
 import java.time.LocalDateTime;

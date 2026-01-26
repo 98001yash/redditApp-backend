@@ -38,7 +38,11 @@ public class PostServiceImpl implements PostService {
                 .title(request.getTitle())
                 .content(request.getContent())
                 .type(request.getType())
+                .score(0)
+                .commentCount(0)
+                .isDeleted(false)
                 .build();
+
 
         Post savedPost = postRepository.save(post);
         return mapToResponse(savedPost);

@@ -2,8 +2,8 @@ package com.redditApp.post_service.advices;
 
 
 
-import com.redditApp.user_service.exceptions.ResourceNotFoundException;
-import com.redditApp.user_service.exceptions.RuntimeConflictException;
+import com.redditApp.post_service.exceptions.ResourceNotFoundException;
+import com.redditApp.post_service.exceptions.RuntimeConflictException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
