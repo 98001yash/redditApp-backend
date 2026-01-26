@@ -8,6 +8,8 @@ import com.redditApp.post_service.dtos.PostResponse;
 import com.redditApp.post_service.dtos.UpdatePostRequest;
 import com.redditApp.post_service.entity.Post;
 import com.redditApp.post_service.event.PostCreatedEvent;
+import com.redditApp.post_service.event.PostDeletedEvent;
+import com.redditApp.post_service.event.PostUpdatedEvent;
 import com.redditApp.post_service.exceptions.ResourceNotFoundException;
 import com.redditApp.post_service.kafka.PostEventProducer;
 import com.redditApp.post_service.repository.PostRepository;
@@ -17,6 +19,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +52,9 @@ public class PostServiceImpl implements PostService {
 
 
         Post saved = postRepository.save(post);
-        producer.publishPostCreated(
+
+        // Handling event-driven system
+        producer.publishCreated(
                 PostCreatedEvent.builder()
                         .postId(saved.getId())
                         .userId(saved.getUserId())
@@ -111,6 +117,16 @@ public class PostServiceImpl implements PostService {
 
         post.setTitle(request.getTitle());
         post.setContent(request.getContent());
+
+        // Handling event-driven system
+        producer.publishUpdated(
+                PostUpdatedEvent.builder()
+                        .postId(post.getId())
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .updatedAt(post.getUpdatedAt())
+                        .build()
+        );
         return mapToResponse(post);
     }
 
@@ -128,8 +144,16 @@ public class PostServiceImpl implements PostService {
             throw new SecurityException("Forbidden");
         }
         post.setIsDeleted(true);
-    }
 
+        // Event-driven system
+        producer.publishDeleted(
+                PostDeletedEvent.builder()
+                        .postId(post.getId())
+                        .deletedAt(Instant.now())
+                        .build()
+        );
+
+    }
     // HELPER
     private PostResponse mapToResponse(Post post){
         return PostResponse.builder()
