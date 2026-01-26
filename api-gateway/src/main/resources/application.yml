@@ -41,6 +41,13 @@ spring:
           filters:
             - AuthenticationFilter
 
+        - id: feed-service
+          uri: lb://feed-service
+          predicates:
+            - Path=/feed/**
+          filters:
+            - AuthenticationFilter
+
 server:
   port: 8081
 
