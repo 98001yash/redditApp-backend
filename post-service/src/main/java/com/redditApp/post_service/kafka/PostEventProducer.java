@@ -1,9 +1,10 @@
 package com.redditApp.post_service.kafka;
 
 
-import com.redditApp.post_service.event.PostCreatedEvent;
-import com.redditApp.post_service.event.PostDeletedEvent;
-import com.redditApp.post_service.event.PostUpdatedEvent;
+
+import com.redditApp.event.PostCreatedEvent;
+import com.redditApp.event.PostDeletedEvent;
+import com.redditApp.event.PostUpdatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

@@ -1,8 +1,9 @@
 package com.redditApp.feed_service.kafka;
 
-import com.redditApp.feed_service.event.PostCreatedEvent;
-import com.redditApp.feed_service.event.PostDeletedEvent;
-import com.redditApp.feed_service.event.PostUpdatedEvent;
+
+import com.redditApp.event.PostCreatedEvent;
+import com.redditApp.event.PostDeletedEvent;
+import com.redditApp.event.PostUpdatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

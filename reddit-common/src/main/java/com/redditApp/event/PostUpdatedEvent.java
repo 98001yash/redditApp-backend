@@ -1,4 +1,4 @@
-package com.redditApp.post_service.event;
+package com.redditApp.event;
 
 
 import lombok.AllArgsConstructor;
@@ -12,10 +12,10 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostCreatedEvent {
+public class PostUpdatedEvent {
 
     private Long postId;
-    private Long userId;
-    private Long subRedditId;
-    private Instant createdAt;
+    private String title;
+    private String content;
+    private Instant updatedAt;
 }

@@ -57,6 +57,13 @@
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.redditApp</groupId>
+			<artifactId>reddit-common</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.modelmapper</groupId>

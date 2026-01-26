@@ -2,14 +2,15 @@ package com.redditApp.post_service.service.Impl;
 
 
 
+import com.redditApp.event.PostCreatedEvent;
+import com.redditApp.event.PostDeletedEvent;
+import com.redditApp.event.PostUpdatedEvent;
 import com.redditApp.post_service.auth.UserContextHolder;
 import com.redditApp.post_service.dtos.CreatePostRequest;
 import com.redditApp.post_service.dtos.PostResponse;
 import com.redditApp.post_service.dtos.UpdatePostRequest;
 import com.redditApp.post_service.entity.Post;
-import com.redditApp.post_service.event.PostCreatedEvent;
-import com.redditApp.post_service.event.PostDeletedEvent;
-import com.redditApp.post_service.event.PostUpdatedEvent;
+
 import com.redditApp.post_service.exceptions.ResourceNotFoundException;
 import com.redditApp.post_service.kafka.PostEventProducer;
 import com.redditApp.post_service.repository.PostRepository;
