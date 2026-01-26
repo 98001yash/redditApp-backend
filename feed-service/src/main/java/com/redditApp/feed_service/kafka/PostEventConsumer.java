@@ -1,6 +1,8 @@
 package com.redditApp.feed_service.kafka;
 
 import com.redditApp.feed_service.event.PostCreatedEvent;
+import com.redditApp.feed_service.event.PostDeletedEvent;
+import com.redditApp.feed_service.event.PostUpdatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,5 +35,30 @@ public class PostEventConsumer {
                         event.getPostId().toString(),
                         score
                 );
+    }
+
+
+    // UPDATE
+    @KafkaListener(topics="post-updated", groupId="feed-service")
+    public void consumeUpdate(PostUpdatedEvent event){
+
+        // For now: just refresh score (optional)
+        redisTemplate.opsForZSet()
+                .add(MAIN_FEED,
+                        event.getPostId().toString(),
+                        event.getUpdatedAt().toEpochMilli());
+
+        log.info("Updated post {} in feed", event.getPostId());
+    }
+
+    // DELETE
+    @KafkaListener(topics="post-deleted", groupId="feed-service")
+    public void consumeDelete(PostDeletedEvent event){
+
+        redisTemplate.opsForZSet()
+                .remove(MAIN_FEED,
+                        event.getPostId().toString());
+
+        log.info("Removed post {} from feed", event.getPostId());
     }
 }
