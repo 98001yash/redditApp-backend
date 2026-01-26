@@ -22,7 +22,7 @@ public class PostEventConsumer {
 
     @KafkaListener(
             topics = "post-created",
-            groupId = "feed-service"
+            containerFactory = "createdFactory"
     )
     public void consume(PostCreatedEvent event) {
 
@@ -40,7 +40,10 @@ public class PostEventConsumer {
 
 
     // UPDATE
-    @KafkaListener(topics="post-updated", groupId="feed-service")
+    @KafkaListener(
+            topics = "post-updated",
+            containerFactory = "updatedFactory"
+    )
     public void consumeUpdate(PostUpdatedEvent event){
 
         // For now: just refresh score (optional)
@@ -53,8 +56,11 @@ public class PostEventConsumer {
     }
 
     // DELETE
-    @KafkaListener(topics="post-deleted", groupId="feed-service")
-    public void consumeDelete(PostDeletedEvent event){
+    @KafkaListener(
+            topics = "post-deleted",
+            containerFactory = "deletedFactory"
+    )
+    public void consumeDelete(PostDeletedEvent event) {
 
         redisTemplate.opsForZSet()
                 .remove(MAIN_FEED,
