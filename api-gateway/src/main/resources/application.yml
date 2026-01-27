@@ -48,6 +48,13 @@ spring:
           filters:
             - AuthenticationFilter
 
+        - id: vote-service
+          uri: lb://vote-service
+          predicates:
+            - Path=/vote/**
+          filters:
+            - AuthenticationFilter
+
 server:
   port: 8081
 
