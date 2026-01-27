@@ -1,11 +1,13 @@
 package com.redditApp.vote_service.service.Impl;
 
 
+import com.redditApp.event.PostVotedEvent;
 import com.redditApp.vote_service.auth.UserContextHolder;
 import com.redditApp.vote_service.dtos.VoteRequest;
 import com.redditApp.vote_service.dtos.VoteResponse;
 import com.redditApp.vote_service.entity.Vote;
 import com.redditApp.vote_service.enums.VoteType;
+import com.redditApp.vote_service.kafka.VoteEventProducer;
 import com.redditApp.vote_service.repository.VoteRepository;
 import com.redditApp.vote_service.service.VoteService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import java.util.Optional;
 public class VoteServiceImpl implements VoteService {
 
     private final VoteRepository voteRepository;
+    private final VoteEventProducer producer;
 
 
     @Override
@@ -74,6 +77,16 @@ public class VoteServiceImpl implements VoteService {
         }
 
         Long score = voteRepository.getPostScore(postId);
+
+        //publish event
+        PostVotedEvent event = PostVotedEvent.builder()
+                .postId(postId)
+                .userId(userId)
+                .newScore(score)
+                .voteType(finalVote !=null ? finalVote.name() : "NONE")
+                .build();
+        producer.publish(event);
+
 
         return VoteResponse.builder()
                 .postId(postId)
