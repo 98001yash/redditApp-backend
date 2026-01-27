@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/feed-service/pom.xml" />
         <option value="$PROJECT_DIR$/reddit-common/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/vote-service/pom.xml" />
       </list>
     </option>
   </component>

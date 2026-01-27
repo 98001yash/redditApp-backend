@@ -17,6 +17,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
         </processorPath>
         <module name="api-gateway" />
+        <module name="vote-service" />
         <module name="auth-service" />
         <module name="post-service" />
         <module name="user-service" />
@@ -32,6 +33,7 @@
       <module name="feed-service" options="-parameters" />
       <module name="post-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
+      <module name="vote-service" options="-parameters" />
     </option>
   </component>
 </project>
