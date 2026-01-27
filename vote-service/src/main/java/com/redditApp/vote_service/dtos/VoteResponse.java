@@ -14,5 +14,5 @@ public class VoteResponse {
     // current score after vote
     private Long score;
 
-    private Integer userVote;
+    private String userVote;
 }

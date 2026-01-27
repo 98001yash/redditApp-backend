@@ -79,7 +79,7 @@ public class VoteServiceImpl implements VoteService {
                 .postId(postId)
                 .score(score)
                 .userVote(
-                        Integer.valueOf(finalVote != null
+                        (finalVote != null
                                 ? finalVote.name()
                                 : "NONE")
                 )
