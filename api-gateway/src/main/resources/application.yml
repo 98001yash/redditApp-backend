@@ -62,6 +62,13 @@ spring:
           filters:
             - AuthenticationFilter
 
+        - id: comment-service
+          uri: lb://comment-service
+          predicates:
+            - Path=/comment/**
+          filters:
+            - AuthenticationFilter
+
 server:
   port: 8081
 
