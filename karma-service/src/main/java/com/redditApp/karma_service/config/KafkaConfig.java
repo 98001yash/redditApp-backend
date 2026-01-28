@@ -36,9 +36,16 @@ public class KafkaConfig {
                 StringDeserializer.class
         );
 
+        props.put(
+                ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,
+                "earliest"
+        );
+
         return props;
     }
 
+
+    // ---------- POST VOTED ----------
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, PostVotedEvent>
     postVotedFactory() {
@@ -47,6 +54,7 @@ public class KafkaConfig {
                 new JsonDeserializer<>(PostVotedEvent.class);
 
         deserializer.addTrustedPackages("*");
+        deserializer.setUseTypeMapperForKey(false);
 
         DefaultKafkaConsumerFactory<String, PostVotedEvent> factory =
                 new DefaultKafkaConsumerFactory<>(
