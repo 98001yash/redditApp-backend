@@ -22,6 +22,7 @@
         <module>api-gateway</module>
         <module>vote-service</module>
         <module>karma-service</module>
+        <module>comment-service</module>
     </modules>
 
     <!-- COMMON DEPENDENCY VERSIONS -->
