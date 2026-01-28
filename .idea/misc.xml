@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/reddit-common/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/vote-service/pom.xml" />
+        <option value="$PROJECT_DIR$/karma-service/pom.xml" />
       </list>
     </option>
   </component>

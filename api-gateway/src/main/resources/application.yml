@@ -55,6 +55,13 @@ spring:
           filters:
             - AuthenticationFilter
 
+        - id: karma-service
+          uri: lb://karma-service
+          predicates:
+            - Path=/karma/**
+          filters:
+            - AuthenticationFilter
+
 server:
   port: 8081
 
