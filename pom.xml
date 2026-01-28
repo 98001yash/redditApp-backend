@@ -21,6 +21,7 @@
         <module>discovery-server</module>
         <module>api-gateway</module>
         <module>vote-service</module>
+        <module>karma-service</module>
     </modules>
 
     <!-- COMMON DEPENDENCY VERSIONS -->
