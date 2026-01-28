@@ -54,6 +54,9 @@ public class KafkaConfig {
                 new JsonDeserializer<>(PostVotedEvent.class);
 
         deserializer.addTrustedPackages("*");
+
+        // IMPORTANT
+        deserializer.setRemoveTypeHeaders(true);
         deserializer.setUseTypeMapperForKey(false);
 
         DefaultKafkaConsumerFactory<String, PostVotedEvent> factory =
@@ -70,4 +73,5 @@ public class KafkaConfig {
 
         return container;
     }
+
 }

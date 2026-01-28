@@ -17,7 +17,7 @@ public class KarmaEventConsumer {
 
     @KafkaListener(
             topics = "post-voted",
-            groupId = "karma-service"
+            containerFactory = "postVotedFactory"
     )
     public void consume(PostVotedEvent event) {
 
