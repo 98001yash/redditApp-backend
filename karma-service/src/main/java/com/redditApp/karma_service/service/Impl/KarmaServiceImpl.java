@@ -43,6 +43,6 @@ public class KarmaServiceImpl implements KarmaService {
     public Long getKarma(Long userId) {
         Long karma = karmaRepository.getKarmaByUserId(userId);
 
-        return karma !=null ? karma : 9L;
+        return karma !=null ? karma : 0L;
     }
 }
