@@ -24,6 +24,7 @@
         <module name="vote-service" />
         <module name="user-service" />
         <module name="karma-service" />
+        <module name="notification-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -35,6 +36,7 @@
       <module name="discovery-server" options="-parameters" />
       <module name="feed-service" options="-parameters" />
       <module name="karma-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
       <module name="post-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="vote-service" options="-parameters" />

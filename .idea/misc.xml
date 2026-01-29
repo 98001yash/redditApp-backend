@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/vote-service/pom.xml" />
         <option value="$PROJECT_DIR$/karma-service/pom.xml" />
         <option value="$PROJECT_DIR$/comment-service/pom.xml" />
+        <option value="$PROJECT_DIR$/notification-service/pom.xml" />
       </list>
     </option>
   </component>

@@ -27,12 +27,14 @@ spring:
           filters:
             - AuthenticationFilter
 
+
         - id: user-service
           uri: lb://user-service
           predicates:
             - Path=/user/**
           filters:
             - AuthenticationFilter
+
 
         - id: post-service
           uri: lb://post-service
@@ -41,12 +43,14 @@ spring:
           filters:
             - AuthenticationFilter
 
+
         - id: feed-service
           uri: lb://feed-service
           predicates:
             - Path=/feed/**
           filters:
             - AuthenticationFilter
+
 
         - id: vote-service
           uri: lb://vote-service
@@ -55,6 +59,7 @@ spring:
           filters:
             - AuthenticationFilter
 
+
         - id: karma-service
           uri: lb://karma-service
           predicates:
@@ -62,10 +67,19 @@ spring:
           filters:
             - AuthenticationFilter
 
+
         - id: comment-service
           uri: lb://comment-service
           predicates:
             - Path=/comment/**
+          filters:
+            - AuthenticationFilter
+
+
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/notification/**
           filters:
             - AuthenticationFilter
 
