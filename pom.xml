@@ -23,6 +23,7 @@
         <module>vote-service</module>
         <module>karma-service</module>
         <module>comment-service</module>
+        <module>notification-service</module>
     </modules>
 
     <!-- COMMON DEPENDENCY VERSIONS -->
