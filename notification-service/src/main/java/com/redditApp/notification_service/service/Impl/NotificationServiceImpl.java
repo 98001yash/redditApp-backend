@@ -46,7 +46,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void markAsRead(Long notificationId) {
+    public void markAsRead(Long notificationId, Long userId) {
 
 
         Notification notification =
