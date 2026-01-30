@@ -19,7 +19,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final NotificationRepository notificationRepository;
 
     @Override
-    public void createNotification(Long userId, String message, String type) {
+    public void createNotification(Long userId, String message, String type, Long postId) {
 
         Notification notification = Notification.builder()
                 .userId(userId)

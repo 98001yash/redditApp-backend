@@ -1,6 +1,7 @@
 package com.redditApp.notification_service.kafka;
 
 
+import com.redditApp.event.CommentCreatedEvent;
 import com.redditApp.event.PostVotedEvent;
 import com.redditApp.notification_service.service.NotificationService;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +32,9 @@ public class NotificationEventConsumer {
         notificationService.createNotification(
                 event.getUserId(),
                 message,
-                "VOTE"
-        );
+                "VOTE",
+                event.getPostId());
     }
+
 
 }

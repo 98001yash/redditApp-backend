@@ -1,5 +1,6 @@
 package com.redditApp.notification_service.config;
 
+import com.redditApp.event.CommentCreatedEvent;
 import com.redditApp.event.PostVotedEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -56,4 +57,29 @@ public class KafkaConfig {
 
         return container;
     }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, CommentCreatedEvent>
+    commentFactory() {
+
+        JsonDeserializer<CommentCreatedEvent> deserializer =
+                new JsonDeserializer<>(CommentCreatedEvent.class);
+
+        deserializer.addTrustedPackages("*");
+
+        DefaultKafkaConsumerFactory<String, CommentCreatedEvent> factory =
+                new DefaultKafkaConsumerFactory<>(
+                        baseProps(),
+                        new StringDeserializer(),
+                        deserializer
+                );
+
+        ConcurrentKafkaListenerContainerFactory<String, CommentCreatedEvent> container =
+                new ConcurrentKafkaListenerContainerFactory<>();
+
+        container.setConsumerFactory(factory);
+
+        return container;
+    }
+
 }
