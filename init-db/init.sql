@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS reddit_notificationdb;
+CREATE DATABASE IF NOT EXISTS reddit_authdb;
+
