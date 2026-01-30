@@ -1,3 +1,4 @@
 CREATE DATABASE IF NOT EXISTS reddit_notificationdb;
 CREATE DATABASE IF NOT EXISTS reddit_authdb;
+CREATE DATABASE IF NOT EXISTS reddit_userdb;
 

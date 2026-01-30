@@ -107,6 +107,33 @@ services:
       JWT_SECRET_KEY: mysupersecurekeyformysafarsaathijwt1234567890abcdefABCDEF1234567890
 
 
+  # ---------------- USER SERVICE ----------------
+  user-service:
+    image: reddit-user-service
+    container_name: user-service
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      discovery-server:
+        condition: service_started
+
+    ports:
+      - "8091:8091"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/reddit_userdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: yash8252
+
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
+
+
+
 
 volumes:
   mysql-data:

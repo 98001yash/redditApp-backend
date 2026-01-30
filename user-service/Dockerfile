@@ -22,7 +22,7 @@ COPY karma-service ./karma-service
 COPY comment-service ./comment-service
 
 # Build only auth-service
-RUN mvn clean package -pl auth-service -am -DskipTests
+RUN mvn clean package -pl user-service -am -DskipTests
 
 
 
@@ -31,8 +31,8 @@ FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY --from=build /app/auth-service/target/*.jar app.jar
+COPY --from=build /app/user-service/target/*.jar app.jar
 
-EXPOSE 8090
+EXPOSE 8091
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
