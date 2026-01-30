@@ -33,6 +33,6 @@ WORKDIR /app
 
 COPY --from=build /app/post-service/target/*.jar app.jar
 
-EXPOSE 8091
+EXPOSE 8092
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
