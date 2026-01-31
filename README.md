@@ -21,16 +21,7 @@ Key goals:
 
 ---
 ## Architecture
-
-Client
-↓
-API Gateway (JWT, Routing)
-↓
-Service Discovery (Eureka)
-↓
-Microservices Layer
-↓
-MySQL | Kafka | Monitoring Stack
+<img width="1024" height="1536" alt="ChatGPT Image Jan 31, 2026, 05_48_31 PM" src="https://github.com/user-attachments/assets/81b93969-5314-4c82-a02b-a3ca8e38fa07" />
 
 
 
@@ -224,3 +215,4 @@ Backend Engineer – Java, Spring, Microservices
 GitHub: https://github.com/98001yash
 
 LinkedIn: https://www.linkedin.com/in/yash-chauhan-a415b6246
+
