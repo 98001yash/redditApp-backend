@@ -218,9 +218,9 @@ Canary releases
 
 Author
 
-Your Name
+Yash chauhan
 Backend Engineer – Java, Spring, Microservices
 
-GitHub: https://github.com/your-username
+GitHub: https://github.com/98001yash
 
-LinkedIn: https://linkedin.com/in/your-profile
+LinkedIn: https://www.linkedin.com/in/yash-chauhan-a415b6246
