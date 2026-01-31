@@ -25,6 +25,7 @@ spring:
               - OPTIONS
 
       routes:
+
         - id: actuator
           uri: http://localhost:8081
           predicates:

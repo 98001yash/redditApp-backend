@@ -24,3 +24,32 @@ scrape_configs:
     metrics_path: "/actuator/prometheus"
     static_configs:
       - targets: ["post-service:8092"]
+
+
+  - job_name: "notification-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["notification-service:8097"]
+
+
+  - job_name: "feed-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["feed-service:8093"]
+
+
+  - job_name: "karma-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["karma-service:8095"]
+
+  - job_name: "comment-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["comment-service:8096"]
+
+
+  - job_name: "api-gateway"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["api-gateway:8081"]

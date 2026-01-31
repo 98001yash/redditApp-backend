@@ -22,7 +22,8 @@ COPY karma-service ./karma-service
 COPY comment-service ./comment-service
 
 # Build only api-gateway module
-RUN mvn clean package -pl api-gateway -am -DskipTests
+RUN mvn clean install -DskipTests
+
 
 
 # ===============================
@@ -34,7 +35,10 @@ WORKDIR /app
 
 # Copy only the built jar
 COPY --from=build /app/api-gateway/target/*.jar app.jar
+COPY api-gateway/src/main/resources/application.yml /app/application.yml
+
 
 EXPOSE 8081
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar","--spring.config.location=file:/app/application.yml"]
+

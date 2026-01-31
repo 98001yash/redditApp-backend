@@ -23,9 +23,15 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<AbstractG
     @Override
     public GatewayFilter apply(NameConfig config) {
         return (exchange, chain) -> {
+
             String path = exchange.getRequest().getURI().getPath();
 
-            // Skip public paths
+            //  Allow actuator endpoints (Prometheus, health, etc.)
+            if (path.startsWith("/actuator")) {
+                return chain.filter(exchange);
+            }
+
+            //  Allow public auth endpoints
             if (path.equals("/auth/login") || path.equals("/auth/signup")) {
                 log.info("Public path, skipping authentication: {}", path);
                 return chain.filter(exchange);
@@ -44,11 +50,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<AbstractG
             final String token = tokenHeader.substring(7).trim();
 
             try {
-                // Extract userId and roles from JWT
                 String userId = jwtService.getUserIdFromToken(token);
-                String roles = jwtService.getRolesFromToken(token); // comma-separated roles
+                String roles = jwtService.getRolesFromToken(token);
 
-                // Pass headers downstream
                 ServerWebExchange modifiedExchange = exchange
                         .mutate()
                         .request(r -> r.header("X-User-Id", userId)
@@ -56,8 +60,11 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<AbstractG
                         .build();
 
                 log.info("Authenticated user ID: {}, Roles: {}", userId, roles);
+
                 return chain.filter(modifiedExchange);
+
             } catch (JwtException e) {
+
                 log.error("Jwt Exception: {}", e.getLocalizedMessage());
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                 return exchange.getResponse().setComplete();

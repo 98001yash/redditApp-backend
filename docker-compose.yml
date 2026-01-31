@@ -283,6 +283,16 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
       JWT_SECRET_KEY: mysupersecurekeyformysafarsaathijwt1234567890abcdefABCDEF1234567890
 
+    volumes:
+      - ./config/api-gateway/application.yml:/app/application.yml
+
+    command:
+      - java
+      - -jar
+      - /app/app.jar
+      - --spring.config.location=file:/app/application.yml
+
+
 
 
   prometheus:
@@ -297,6 +307,11 @@ services:
       - user-service
       - vote-service
       - post-service
+      - notification-service
+      - feed-service
+      - karma-service
+      - comment-service
+      - api-gateway
 
 
   grafana:
