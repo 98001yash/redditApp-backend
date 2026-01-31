@@ -1,147 +1,246 @@
-📘 RedditApp – Distributed Microservices Backend
+⭐ RedditApp – Scalable Microservices Backend
 
-A production-grade Reddit-like backend system built using Spring Boot, Spring Cloud, Docker, Kafka, and CI/CD pipelines.
+A production-grade Reddit-like backend system built with Spring Boot, Spring Cloud, Kafka, and Docker, featuring full observability, CI/CD automation, and cloud-ready deployment.
 
-This project demonstrates real-world microservices architecture, observability, security, and DevOps practices.
+<p align="center"> <img src="https://img.shields.io/badge/Java-17-orange?style=flat-square" /> <img src="https://img.shields.io/badge/SpringBoot-3.x-brightgreen?style=flat-square" /> <img src="https://img.shields.io/badge/Docker-Ready-blue?style=flat-square" /> <img src="https://img.shields.io/badge/CI/CD-GitHub_Actions-black?style=flat-square" /> <img src="https://img.shields.io/badge/Monitoring-Prometheus%20%7C%20Grafana-red?style=flat-square" /> </p>
+📌 Overview
 
-🚀 Tech Stack
+RedditApp is a fully distributed backend platform inspired by Reddit, designed to demonstrate real-world microservices engineering.
+
+It implements:
+
+Independent, scalable services
+
+Centralized API Gateway
+
+Secure authentication
+
+Event-driven communication
+
+Full observability stack
+
+Automated DevOps pipelines
+
+This project focuses on production-readiness, not just functionality.
+
+🏗️ System Architecture
+ Client
+   │
+   ▼
+API Gateway (JWT + Routing)
+   │
+   ▼
+Service Discovery (Eureka)
+   │
+   ▼
+Microservices Layer
+   │
+   ├── MySQL
+   ├── Kafka
+   ├── Prometheus
+   ├── Grafana
+   └── Zipkin
+
+
+All services are containerized and orchestrated using Docker Compose.
+
+🧩 Microservices
+Service	Responsibility
+api-gateway	Routing, Authentication, Filters
+auth-service	Login, JWT, Token Validation
+user-service	User Management
+post-service	Post Creation & Retrieval
+comment-service	Comments Handling
+feed-service	Personalized Feed
+vote-service	Upvotes / Downvotes
+karma-service	Reputation System
+notification-service	Async Notifications
+
+Each service is independently deployable.
+
+⚙️ Technology Stack
 Backend
-Java, Spring Boot
+
+Java 17
+
+Spring Boot
+
 Spring Cloud (Gateway, Eureka)
-JWT Authentication
+
 Resilience4j
 
-Database
+JWT Security
+
+Data & Messaging
+
 MySQL
 
-Messaging
 Apache Kafka
 
-Monitoring & Tracing
-Prometheus
-Grafana
-Zipkin
+Observability
+
 Spring Boot Actuator
-DevOps & Deployment
-Docker & Docker Compose
 
-GitHub Actions (CI/CD)
-Docker Hub
+Prometheus
 
-🏗 Architecture Overview
-API Gateway (Central Entry Point)
-Service Discovery (Eureka)
+Grafana
 
-Independent Microservices
-Event-Driven Communication (Kafka)
-Centralized Monitoring & Logging
-Containerized Deployment
+Zipkin
 
-Services
-api-gateway
-auth-service
-user-service
-post-service
-comment-service
-feed-service
-vote-service
-karma-service
-notification-service
-
-✨ Key Features
-
- Microservices Architecture
- JWT-Based Authentication
- API Gateway Routing
- Service Discovery
- Kafka Event Processing
- Prometheus-Grafana Monitoring
- Distributed Tracing (Zipkin)
- Dockerized Deployment
- Automated CI/CD
- Fault Tolerance (Resilience4j)
-
-⚙️ System Architecture
-Client → API Gateway → Microservices → MySQL
-                     → Kafka
-                     → Monitoring Stack
-
-
-All services register with Eureka and communicate through the Gateway.
-
-🐳 Running Locally (Docker)
-Prerequisites
+DevOps
 
 Docker
+
 Docker Compose
+
+GitHub Actions
+
+Docker Hub
+
+✨ Core Features
+
+✔️ Distributed Microservices Architecture
+✔️ Centralized API Gateway
+✔️ JWT-Based Authentication
+✔️ Service Discovery
+✔️ Event-Driven Processing
+✔️ Metrics & Dashboards
+✔️ Distributed Tracing
+✔️ CI/CD Automation
+✔️ Fault Tolerance
+✔️ Cloud-Ready Design
+
+🚀 Getting Started
+Prerequisites
+
 Java 17+
 
-Maven
+Maven 3.9+
 
-Steps
+Docker
+
+Docker Compose
+
+🔹 Run Using Docker
 git clone https://github.com/your-username/reddit-app.git
 cd reddit-app
 docker compose up -d
 
+🔹 Access Services
+Tool	URL
+API Gateway	http://localhost:8080
 
-Access:
+Eureka	http://localhost:8761
 
-API Gateway: http://localhost:8080
-Eureka: http://localhost:8761
-Grfana: http://localhost:3000
+Grafana	http://localhost:3000
 
-Prometheus: http://localhost:9090
-Zipkin: http://localhost:9411
+Prometheus	http://localhost:9090
 
-🔁 CI/CD Pipeline
-Implemented using GitHub Actions:
+Zipkin	http://localhost:9411
+🔄 CI/CD Pipeline
 
-Build & Test
-Docker Image Creation
-Push to Docker Hub
+Each microservice is integrated with GitHub Actions.
 
-Versioned Deployment
-Each microservice has its own automated pipeline.
+Pipeline stages:
 
-📊 Observability
+1️⃣ Build & Test (Maven)
+2️⃣ Docker Image Creation
+3️⃣ Push to Docker Hub
+4️⃣ Versioned Deployment
 
-Health Checks: Spring Actuator
-Metrics: Prometheus
+Ensures consistent and reliable delivery.
 
-Dashboards: Grafana
-Tracing: Zipkin
-Provides full visibility across services.
+📊 Monitoring & Tracing
+Monitoring
 
-🔐 Security
+Prometheus collects metrics
+
+Grafana visualizes dashboards
+
+Actuator exposes health endpoints
+
+Tracing
+
+Zipkin tracks inter-service calls
+
+Enables root cause analysis
+
+Provides full system visibility.
+
+🔐 Security Design
+
 JWT Authentication
-Gateway-Level Filters
+
+Gateway-Level Validation
+
 Secure Environment Variables
-Externalized Configurations
 
-🧠 Learning Outcomes
+Externalized Configs
 
-Through this project, I gained experience in:
+No Hardcoded Secrets
+
+🛠️ Engineering Challenges Solved
+
+✔️ Multi-module Maven conflicts
+✔️ Docker networking issues
+✔️ Kafka broker setup
+✔️ Service startup ordering
+✔️ CI pipeline failures
+✔️ Build cache optimization
+
+This project involved real-world debugging.
+
+📈 Performance & Resilience
+
+Circuit Breakers (Resilience4j)
+
+Timeout Handling
+
+Graceful Degradation
+
+Health Monitoring
+
+Designed for high availability.
+
+🧠 What I Learned
+
 Designing distributed systems
 
-Debugging container networking
-Managing CI/CD pipelines
-Monitoring production systems
-Handling service failures
+DevOps automation
 
-Optimizing build performance
+Observability tooling
 
-📌 Future Improvements
+Fault tolerance patterns
+
+Production debugging
+
+Infrastructure management
+
+🚧 Roadmap
+
 Kubernetes Deployment
-Centralized Config Server
-ELK Stack Logging
-Autoscaling
+
+Config Server
+
+ELK Logging
+
 OAuth2 Integration
+
+Autoscaling
+
+Canary Releases
 
 👨‍💻 Author
 
-Yash chauhan
-Backend Engineer | Java | Spring | DevOps
+Your Name
+Backend Engineer | Java | Microservices | DevOps
 
-LinkedIn: https://www.linkedin.com/in/yash-chauhan-a415b6246
-GitHub: https://github.com/98001yash/redditApp-backend
+🔗 GitHub: https://github.com/your-username
 
+🔗 LinkedIn: https://linkedin.com/in/your-profile
+
+⭐ Support
+
+If you find this project useful, consider giving it a ⭐ star.
+
+It motivates continuous improvement.
