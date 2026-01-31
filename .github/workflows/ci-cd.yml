@@ -67,3 +67,25 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/vote-service -f vote-service/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/vote-service
+
+
+      - name: Build & Push notification Service
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/notification-service -f notification-service/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/notification-service
+          
+
+      - name: Build & Push comment Service
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/comment-service -f comment-service/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/comment-service
+
+      - name: Build & Push karma Service
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/karma-service -f karma-service/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/karma-service
+
+      - name: Build & Push discovery-server
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/discovery-server -f discovery-server/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/discovery-server
