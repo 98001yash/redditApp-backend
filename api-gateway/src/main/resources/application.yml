@@ -36,6 +36,11 @@ spring:
             - Path=/auth/**
           filters:
             - AuthenticationFilter
+            - name: CircuitBreaker
+              args:
+                name: authCB
+                fallbackUri: forward:/fallback/auth
+
 
         - id: user-service
           uri: lb://USER-SERVICE
@@ -50,6 +55,11 @@ spring:
             - Path=/post/**
           filters:
             - AuthenticationFilter
+            - name: CircuitBreaker
+              args:
+                name: authCB
+                fallbackUri: forward:/fallback/auth
+
 
         - id: feed-service
           uri: lb://FEED-SERVICE
@@ -116,6 +126,24 @@ management:
   zipkin:
     tracing:
       endpoint: http://zipkin:9411/api/v2/spans
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+
+      authCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
+      postCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
 
 
 

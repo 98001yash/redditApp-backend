@@ -25,7 +25,6 @@ spring:
               - OPTIONS
 
       routes:
-
         - id: actuator
           uri: http://localhost:8081
           predicates:
@@ -117,6 +116,24 @@ management:
   zipkin:
     tracing:
       endpoint: http://zipkin:9411/api/v2/spans
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+
+      authCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
+      postCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
 
 
 
