@@ -37,7 +37,7 @@ jobs:
       # 5. Build & Push API Gateway
       - name: Build & Push API Gateway
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/api-gateway .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/api-gateway -f api-gateway/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/api-gateway
 
       # 6. Build & Push Auth Service
