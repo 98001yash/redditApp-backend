@@ -1,5 +1,5 @@
 jwt:
-  secretKey: mysupersecurekeyformysafarsaathijwt1234567890abcdefABCDEF1234567890
+  secretKey: ${JWT_SECRET_KEY}
 
 spring:
   application:
@@ -9,6 +9,7 @@ spring:
     gateway:
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -19,81 +20,80 @@ spring:
               - PUT
               - DELETE
               - OPTIONS
+
       routes:
+
         - id: auth-service
-          uri: lb://auth-service
+          uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
           filters:
             - AuthenticationFilter
 
-
         - id: user-service
-          uri: lb://user-service
+          uri: lb://USER-SERVICE
           predicates:
             - Path=/user/**
           filters:
             - AuthenticationFilter
 
-
         - id: post-service
-          uri: lb://post-service
+          uri: lb://POST-SERVICE
           predicates:
             - Path=/post/**
           filters:
             - AuthenticationFilter
 
-
         - id: feed-service
-          uri: lb://feed-service
+          uri: lb://FEED-SERVICE
           predicates:
             - Path=/feed/**
           filters:
             - AuthenticationFilter
 
-
         - id: vote-service
-          uri: lb://vote-service
+          uri: lb://VOTE-SERVICE
           predicates:
             - Path=/vote/**
           filters:
             - AuthenticationFilter
 
-
         - id: karma-service
-          uri: lb://karma-service
+          uri: lb://KARMA-SERVICE
           predicates:
             - Path=/karma/**
           filters:
             - AuthenticationFilter
 
-
         - id: comment-service
-          uri: lb://comment-service
+          uri: lb://COMMENT-SERVICE
           predicates:
             - Path=/comment/**
           filters:
             - AuthenticationFilter
 
-
         - id: notification-service
-          uri: lb://notification-service
+          uri: lb://NOTIFICATION-SERVICE
           predicates:
             - Path=/notification/**
           filters:
             - AuthenticationFilter
 
+
 server:
   port: 8081
+
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://discovery-server:8761/eureka}
     register-with-eureka: true
     fetch-registry: true
+
   instance:
     prefer-ip-address: true
+
 
 logging:
   level:

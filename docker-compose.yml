@@ -268,6 +268,22 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
 
 
+  api-gateway:
+    image: reddit-api-gateway
+    container_name: api-gateway
+
+    depends_on:
+      discovery-server:
+        condition: service_started
+
+    ports:
+      - "8081:8081"
+
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
+      JWT_SECRET_KEY: mysupersecurekeyformysafarsaathijwt1234567890abcdefABCDEF1234567890
+
+
 
 volumes:
   mysql-data:
