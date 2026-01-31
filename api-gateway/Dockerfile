@@ -8,7 +8,7 @@ WORKDIR /app
 # Copy parent pom
 COPY pom.xml .
 
-# Copy all modules (needed for multi-module build)
+# Copy all modules
 COPY reddit-common ./reddit-common
 COPY discovery-server ./discovery-server
 COPY notification-service ./notification-service
@@ -21,9 +21,8 @@ COPY vote-service ./vote-service
 COPY karma-service ./karma-service
 COPY comment-service ./comment-service
 
-# Build only api-gateway module
+# Build api-gateway
 RUN mvn clean install -DskipTests
-
 
 
 # ===============================
@@ -33,12 +32,9 @@ FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-# Copy only the built jar
+# Copy jar only
 COPY --from=build /app/api-gateway/target/*.jar app.jar
-COPY api-gateway/src/main/resources/application.yml /app/application.yml
-
 
 EXPOSE 8081
 
-ENTRYPOINT ["java","-jar","app.jar","--spring.config.location=file:/app/application.yml"]
-
+ENTRYPOINT ["java","-jar","app.jar"]
