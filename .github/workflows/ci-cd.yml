@@ -43,5 +43,5 @@ jobs:
       # 6. Build & Push Auth Service
       - name: Build & Push Auth Service
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/auth-service ./auth-service
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/auth-service -f auth-service/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/auth-service
