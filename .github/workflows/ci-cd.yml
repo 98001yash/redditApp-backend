@@ -45,3 +45,25 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/auth-service -f auth-service/Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/auth-service
+
+      - name: Build & Push user Service
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/user-service -f user-service/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/user-service
+      
+
+      - name: Build & Push post Service
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/post-service -f post-service/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/post-service
+          
+
+      - name: Build & Push feed Service
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/feed-service -f feed-service/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/feed-service
+
+      - name: Build & Push vote Service
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/vote-service -f vote-service/Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/vote-service
