@@ -1,132 +1,121 @@
-⭐ RedditApp – Scalable Microservices Backend
+# RedditApp – Scalable Microservices Backend
 
-A production-grade Reddit-like backend system built with Spring Boot, Spring Cloud, Kafka, and Docker, featuring full observability, CI/CD automation, and cloud-ready deployment.
+A production-grade Reddit-like backend built using Spring Boot and Spring Cloud, designed with microservices architecture, event-driven communication, and full observability.
 
-<p align="center"> <img src="https://img.shields.io/badge/Java-17-orange?style=flat-square" /> <img src="https://img.shields.io/badge/SpringBoot-3.x-brightgreen?style=flat-square" /> <img src="https://img.shields.io/badge/Docker-Ready-blue?style=flat-square" /> <img src="https://img.shields.io/badge/CI/CD-GitHub_Actions-black?style=flat-square" /> <img src="https://img.shields.io/badge/Monitoring-Prometheus%20%7C%20Grafana-red?style=flat-square" /> </p>
-📌 Overview
+This project focuses on production readiness, reliability, and DevOps automation.
 
-RedditApp is a fully distributed backend platform inspired by Reddit, designed to demonstrate real-world microservices engineering.
+---
 
-It implements:
+## Overview
 
-Independent, scalable services
+RedditApp is a distributed backend platform inspired by Reddit.  
+It demonstrates real-world system design, cloud-native practices, and automated deployment pipelines.
 
-Centralized API Gateway
+Key goals:
 
-Secure authentication
+- Scalable microservices architecture
+- Secure centralized access
+- Asynchronous event processing
+- End-to-end observability
+- CI/CD-driven delivery
 
-Event-driven communication
+---
+## Architecture
 
-Full observability stack
-
-Automated DevOps pipelines
-
-This project focuses on production-readiness, not just functionality.
-
-🏗️ System Architecture
- Client
-   │
-   ▼
-API Gateway (JWT + Routing)
-   │
-   ▼
+Client
+↓
+API Gateway (JWT, Routing)
+↓
 Service Discovery (Eureka)
-   │
-   ▼
+↓
 Microservices Layer
-   │
-   ├── MySQL
-   ├── Kafka
-   ├── Prometheus
-   ├── Grafana
-   └── Zipkin
+↓
+MySQL | Kafka | Monitoring Stack
+
 
 
 All services are containerized and orchestrated using Docker Compose.
 
-🧩 Microservices
-Service	Responsibility
-api-gateway	Routing, Authentication, Filters
-auth-service	Login, JWT, Token Validation
-user-service	User Management
-post-service	Post Creation & Retrieval
-comment-service	Comments Handling
-feed-service	Personalized Feed
-vote-service	Upvotes / Downvotes
-karma-service	Reputation System
-notification-service	Async Notifications
+---
+
+## Microservices
+
+| Service              | Responsibility                          |
+|----------------------|------------------------------------------|
+| api-gateway          | Routing, authentication, filters         |
+| auth-service         | Login, JWT, token validation              |
+| user-service         | User management                           |
+| post-service         | Post creation and retrieval               |
+| comment-service      | Comment handling                          |
+| feed-service         | Personalized feed generation              |
+| vote-service          | Upvotes and downvotes                     |
+| karma-service        | Reputation system                         |
+| notification-service| Asynchronous notifications                |
 
 Each service is independently deployable.
 
-⚙️ Technology Stack
-Backend
+---
 
-Java 17
+## Technology Stack
 
-Spring Boot
+### Backend
+- Java 17
+- Spring Boot
+- Spring Cloud (Gateway, Eureka)
+- Resilience4j
+- JWT Security
 
-Spring Cloud (Gateway, Eureka)
+### Data & Messaging
+- MySQL
+- Apache Kafka
 
-Resilience4j
+### Observability
+- Spring Boot Actuator
+- Prometheus
+- Grafana
+- Zipkin
 
-JWT Security
+### DevOps
+- Docker
+- Docker Compose
+- GitHub Actions
+- Docker Hub
 
-Data & Messaging
+---
 
-MySQL
+## Core Features
 
-Apache Kafka
+- Distributed microservices architecture
+- Centralized API Gateway
+- JWT-based authentication
+- Service discovery
+- Event-driven processing
+- Metrics and dashboards
+- Distributed tracing
+- CI/CD automation
+- Fault tolerance
+- Cloud-ready design
 
-Observability
+---
 
-Spring Boot Actuator
+## Getting Started
 
-Prometheus
+### Prerequisites
 
-Grafana
+- Java 17+
+- Maven 3.9+
+- Docker
+- Docker Compose
 
-Zipkin
+---
 
-DevOps
+### Run with Docker
 
-Docker
-
-Docker Compose
-
-GitHub Actions
-
-Docker Hub
-
-✨ Core Features
-
-✔️ Distributed Microservices Architecture
-✔️ Centralized API Gateway
-✔️ JWT-Based Authentication
-✔️ Service Discovery
-✔️ Event-Driven Processing
-✔️ Metrics & Dashboards
-✔️ Distributed Tracing
-✔️ CI/CD Automation
-✔️ Fault Tolerance
-✔️ Cloud-Ready Design
-
-🚀 Getting Started
-Prerequisites
-
-Java 17+
-
-Maven 3.9+
-
-Docker
-
-Docker Compose
-
-🔹 Run Using Docker
+```bash
 git clone https://github.com/your-username/reddit-app.git
 cd reddit-app
 docker compose up -d
-
-🔹 Access Services
+  Service Endpoints
 Tool	URL
 API Gateway	http://localhost:8080
 
@@ -137,20 +126,26 @@ Grafana	http://localhost:3000
 Prometheus	http://localhost:9090
 
 Zipkin	http://localhost:9411
-🔄 CI/CD Pipeline
+
+
+
+CI/CD Pipeline
 
 Each microservice is integrated with GitHub Actions.
 
 Pipeline stages:
 
-1️⃣ Build & Test (Maven)
-2️⃣ Docker Image Creation
-3️⃣ Push to Docker Hub
-4️⃣ Versioned Deployment
+Build and test with Maven
+
+Docker image creation
+
+Push to Docker Hub
+
+Versioned deployment
 
 Ensures consistent and reliable delivery.
 
-📊 Monitoring & Tracing
+Monitoring and Tracing
 Monitoring
 
 Prometheus collects metrics
@@ -161,86 +156,71 @@ Actuator exposes health endpoints
 
 Tracing
 
-Zipkin tracks inter-service calls
+Zipkin tracks inter-service communication
 
 Enables root cause analysis
 
 Provides full system visibility.
 
-🔐 Security Design
+Security
 
-JWT Authentication
+JWT authentication
 
-Gateway-Level Validation
+Gateway-level validation
 
-Secure Environment Variables
+Secure environment variables
 
-Externalized Configs
+Externalized configuration
 
-No Hardcoded Secrets
+No hardcoded secrets
 
-🛠️ Engineering Challenges Solved
+Engineering Challenges Solved
 
-✔️ Multi-module Maven conflicts
-✔️ Docker networking issues
-✔️ Kafka broker setup
-✔️ Service startup ordering
-✔️ CI pipeline failures
-✔️ Build cache optimization
+Multi-module Maven conflicts
 
-This project involved real-world debugging.
+Docker networking issues
 
-📈 Performance & Resilience
+Kafka broker configuration
 
-Circuit Breakers (Resilience4j)
+Service startup ordering
 
-Timeout Handling
+CI pipeline failures
 
-Graceful Degradation
+Build cache optimization
 
-Health Monitoring
+This project involved extensive real-world debugging.
+
+Performance and Resilience
+
+Circuit breakers (Resilience4j)
+
+Timeout handling
+
+Graceful degradation
+
+Health monitoring
 
 Designed for high availability.
 
-🧠 What I Learned
+Roadmap
 
-Designing distributed systems
+Kubernetes deployment
 
-DevOps automation
+Centralized config server
 
-Observability tooling
+ELK logging stack
 
-Fault tolerance patterns
-
-Production debugging
-
-Infrastructure management
-
-🚧 Roadmap
-
-Kubernetes Deployment
-
-Config Server
-
-ELK Logging
-
-OAuth2 Integration
+OAuth2 integration
 
 Autoscaling
 
-Canary Releases
+Canary releases
 
-👨‍💻 Author
+Author
 
 Your Name
-Backend Engineer | Java | Microservices | DevOps
+Backend Engineer – Java, Spring, Microservices
 
-🔗 GitHub: https://github.com/your-username
+GitHub: https://github.com/your-username
 
-🔗 LinkedIn: https://linkedin.com/in/your-profile
-
-⭐ Support
-
-If you find this project useful, consider giving it a ⭐ star.
-
-It motivates continuous improvement.
+LinkedIn: https://linkedin.com/in/your-profile
