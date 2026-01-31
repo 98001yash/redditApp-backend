@@ -295,6 +295,8 @@ services:
     depends_on:
       - auth-service
       - user-service
+      - vote-service
+      - post-service
 
 
   grafana:

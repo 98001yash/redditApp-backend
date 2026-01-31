@@ -12,3 +12,15 @@ scrape_configs:
     metrics_path: "/actuator/prometheus"
     static_configs:
       - targets: ["user-service:8091"]
+
+
+  - job_name: "vote-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["vote-service:8094"]
+
+
+  - job_name: "post-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["post-service:8092"]
