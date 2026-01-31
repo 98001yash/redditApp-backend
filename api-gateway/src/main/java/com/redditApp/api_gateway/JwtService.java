@@ -44,7 +44,7 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody();
 
-        System.out.println("JWT Claims: " + claims); // debug log
+        System.out.println("JWT Claims: " + claims);
 
         Object rolesObj = claims.get("roles");
         if (rolesObj == null) {

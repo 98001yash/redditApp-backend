@@ -43,29 +43,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         final String token = header.substring(7);
         try {
-            // Parse claims (will throw if invalid)
             Claims claims = jwtService.extractAllClaims(token);
 
-            // Check expiration
             if (claims.getExpiration() != null && claims.getExpiration().before(new java.util.Date())) {
                 log.warn("JWT expired for token: {}", token);
                 filterChain.doFilter(request, response);
                 return;
             }
 
-            // Extract userId (you set subject to id and also have userId claim)
             Long userId;
             try {
                 userId = claims.get("userId", Long.class);
                 if (userId == null) {
-                    // fallback to subject if claim mapping differs
                     userId = Long.valueOf(claims.getSubject());
                 }
             } catch (Exception e) {
                 userId = Long.valueOf(claims.getSubject());
             }
 
-            // Load user details and set Authentication
             UserDetails userDetails = userDetailsService.loadUserById(userId);
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -75,7 +70,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         } catch (ExpiredJwtException eje) {
             log.warn("JWT token expired: {}", eje.getMessage());
-            // allow filter chain to continue; endpoints can reject if not authenticated
         } catch (Exception ex) {
             log.warn("Failed to authenticate JWT: {}", ex.getMessage());
         }
@@ -85,7 +79,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        // Skip auth for public endpoints (signup/login, actuator, docs etc.)
         String path = request.getRequestURI();
         return path.startsWith("/auth/") ||
                 path.startsWith("/v3/api-docs") ||

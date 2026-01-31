@@ -1,14 +1,10 @@
-# ===============================
-# BUILD STAGE
-# ===============================
+
 FROM maven:3.9.9-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-# Copy parent pom
 COPY pom.xml .
 
-# Copy all modules
 COPY reddit-common ./reddit-common
 COPY discovery-server ./discovery-server
 COPY notification-service ./notification-service
@@ -21,18 +17,14 @@ COPY vote-service ./vote-service
 COPY karma-service ./karma-service
 COPY comment-service ./comment-service
 
-# Build api-gateway
+
 RUN mvn clean install -DskipTests
 
 
-# ===============================
-# RUNTIME STAGE
-# ===============================
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-# Copy jar only
 COPY --from=build /app/api-gateway/target/*.jar app.jar
 
 EXPOSE 8081

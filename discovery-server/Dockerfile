@@ -1,9 +1,8 @@
-# ----------- Build Stage -----------
+
 FROM maven:3.9.9-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-# Copy parent pom and modules
 COPY pom.xml .
 COPY reddit-common ./reddit-common
 COPY discovery-server ./discovery-server
@@ -17,11 +16,9 @@ COPY vote-service ./vote-service
 COPY karma-service ./karma-service
 COPY comment-service ./comment-service
 
-# Build only discovery-server
 RUN mvn clean package -pl discovery-server -am -DskipTests
 
 
-# ----------- Run Stage -----------
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app

@@ -26,12 +26,10 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<AbstractG
 
             String path = exchange.getRequest().getURI().getPath();
 
-            //  Allow actuator endpoints (Prometheus, health, etc.)
             if (path.startsWith("/actuator")) {
                 return chain.filter(exchange);
             }
 
-            //  Allow public auth endpoints
             if (path.equals("/auth/login") || path.equals("/auth/signup")) {
                 log.info("Public path, skipping authentication: {}", path);
                 return chain.filter(exchange);
@@ -73,6 +71,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<AbstractG
     }
 
     public static class Config {
-        // Can leave empty
+
     }
 }

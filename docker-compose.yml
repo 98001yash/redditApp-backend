@@ -1,6 +1,6 @@
 services:
 
-  # ================= MYSQL =================
+  #  MYSQL
   mysql:
     image: mysql:8
     container_name: reddit-mysql
@@ -18,7 +18,7 @@ services:
       retries: 10
 
 
-  # ================= KAFKA =================
+  # KAFKA
   kafka:
     image: apache/kafka:3.7.0
     container_name: kafka
@@ -40,7 +40,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 
-  # ================= EUREKA =================
+  # EUREKA
   discovery-server:
     build:
       context: .
@@ -51,7 +51,7 @@ services:
       - "8761:8761"
 
 
-  # ================= AUTH =================
+  #  AUTH
   auth-service:
     build:
       context: .
@@ -82,7 +82,7 @@ services:
       JWT_SECRET_KEY: mysupersecurekeyformysafarsaathijwt1234567890abcdefABCDEF1234567890
 
 
-  # ================= USER =================
+  # USER
   user-service:
     build:
       context: .
@@ -111,7 +111,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
 
 
-  # ================= POST =================
+  # POST
   post-service:
     build:
       context: .
@@ -139,7 +139,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
 
 
-  # ================= FEED =================
+  #  FEED
   feed-service:
     build:
       context: .
@@ -167,7 +167,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
 
 
-  # ================= VOTE =================
+  #  VOTE
   vote-service:
     build:
       context: .
@@ -195,7 +195,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
 
 
-  # ================= KARMA =================
+  # KARMA
   karma-service:
     build:
       context: .
@@ -223,7 +223,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
 
 
-  # ================= NOTIFICATION =================
+  #  NOTIFICATION
   notification-service:
     build:
       context: .

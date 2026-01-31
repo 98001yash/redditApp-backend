@@ -36,7 +36,6 @@
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
 
-		<!-- Eureka Client -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -93,7 +92,7 @@
 
 
 
-		<!-- Prometheus Registry -->
+
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>

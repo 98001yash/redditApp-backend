@@ -1,14 +1,10 @@
-# ===============================
-# BUILD STAGE
-# ===============================
+
 FROM maven:3.9.9-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-# Copy parent pom
 COPY pom.xml .
 
-# Copy ALL modules (required by parent pom)
 COPY reddit-common ./reddit-common
 COPY discovery-server ./discovery-server
 COPY notification-service ./notification-service
@@ -21,12 +17,11 @@ COPY vote-service ./vote-service
 COPY karma-service ./karma-service
 COPY comment-service ./comment-service
 
-# Build only auth-service
+
 RUN mvn clean package -pl auth-service -am -DskipTests
 
 
 
-# RUNTIME STAGE
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
